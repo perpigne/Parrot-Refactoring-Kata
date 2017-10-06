@@ -8,6 +8,9 @@ public class Parrot {
     private boolean isNailed;
 
 
+    protected Parrot() {
+    }
+
     private Parrot(ParrotTypeEnum _type, int numberOfCoconuts, double voltage, boolean isNailed) {
         this.type = _type;
         this.numberOfCoconuts = numberOfCoconuts;
@@ -16,13 +19,18 @@ public class Parrot {
     }
 
     public static Parrot createParrot(ParrotTypeEnum parrotType, int numberOfCoconuts, double voltage, boolean isNailed) {
-        return new Parrot(parrotType, numberOfCoconuts, voltage, isNailed);
+        switch(parrotType) {
+            case EUROPEAN:
+                return new EuropeanParrot();
+            default:
+                return new Parrot(parrotType, numberOfCoconuts, voltage, isNailed);
+
+        }
+
     }
 
     public double getSpeed() {
         switch(type) {
-            case EUROPEAN:
-                return getBaseSpeed();
             case AFRICAN:
                 return Math.max(0, getBaseSpeed() - getLoadFactor() * numberOfCoconuts);
             case NORWEGIAN_BLUE:
@@ -39,7 +47,7 @@ public class Parrot {
         return 9.0;
     }
 
-    private double getBaseSpeed() {
+    protected double getBaseSpeed() {
         return 12.0;
     }
 
