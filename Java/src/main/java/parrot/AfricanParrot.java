@@ -1,9 +1,11 @@
 package parrot;
 
 public class AfricanParrot extends Parrot {
+    public static final double LOAD_FACTOR = 9.0;
+
     protected int numberOfCoconuts = 0;
 
-    public AfricanParrot(int numberOfCoconuts) {
+    AfricanParrot(int numberOfCoconuts) {
         this.numberOfCoconuts = numberOfCoconuts;
     }
 
