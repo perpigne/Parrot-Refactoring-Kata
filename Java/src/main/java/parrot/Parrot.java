@@ -8,17 +8,6 @@ public abstract class Parrot {
 
 
 
-    public static Parrot createParrot(ParrotTypeEnum parrotType, int numberOfCoconuts, double voltage, boolean isNailed) {
-        switch (parrotType) {
-            case EUROPEAN:
-                return createEuropeanParrot();
-            case AFRICAN:
-                return createAfricanParrot(numberOfCoconuts);
-            default:
-                return createNorwegianParrot(voltage, isNailed);
-        }
-    }
-
     public static Parrot createNorwegianParrot(double voltage, boolean isNailed) {
         return new NorwegianParrot(voltage, isNailed);
     }
