@@ -4,6 +4,9 @@ namespace parrot
 {
     public class Parrot
     {
+        private const double LoadFactor = 9.0;
+        private const double BaseSpeed = 12.0;
+        private const double MaxSpeed = 24.0;
         readonly ParrotTypeEnum _type;
         readonly int _numberOfCoconuts;
         readonly double _voltage;
@@ -34,17 +37,17 @@ namespace parrot
 
         private double GetBaseSpeed(double voltage)
         {
-            return Math.Min(24.0, voltage * GetBaseSpeed());
+            return Math.Min(MaxSpeed, voltage * GetBaseSpeed());
         }
 
         private double GetLoadFactor()
         {
-            return 9.0;
+            return LoadFactor;
         }
 
         private double GetBaseSpeed()
         {
-            return 12.0;
+            return BaseSpeed;
         }
     }
 }
