@@ -26,34 +26,19 @@ namespace parrot
             switch (_type)
             {
                 case ParrotTypeEnum.EUROPEAN:
-                    return GetBaseSpeed();
+                    return BaseSpeed;
                 case ParrotTypeEnum.AFRICAN:
-                    return Math.Max(0, GetBaseSpeed() - GetLoadFactor() * _numberOfCoconuts);
+                    return Math.Max(0, BaseSpeed - LoadFactor * _numberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
+                    return (_isNailed) ? 0 : Math.Min(MaxSpeed, _voltage * BaseSpeed);
             }
 
             throw new Exception("Should be unreachable");
         }
 
-        private double GetBaseSpeed(double voltage)
-        {
-            return Math.Min(MaxSpeed, voltage * GetBaseSpeed());
-        }
-
-        private double GetLoadFactor()
-        {
-            return LoadFactor;
-        }
-
-        private double GetBaseSpeed()
-        {
-            return BaseSpeed;
-        }
-
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
-            return new Parrot(type: type, numberOfCoconuts: numberOfCoconuts, voltage: voltage, isNailed: isNailed);
+            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
         }
     }
 }
