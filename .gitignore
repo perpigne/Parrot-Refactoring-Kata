@@ -3,3 +3,4 @@ PHP/vendor
 .cache
 __pycache__
 .idea/
+**/obj
