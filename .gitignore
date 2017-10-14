@@ -4,3 +4,4 @@ PHP/vendor
 __pycache__
 .idea/
 **/obj
+**/.vs/
