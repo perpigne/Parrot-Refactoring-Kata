@@ -11,7 +11,7 @@ namespace parrot
         readonly double _voltage;
         readonly bool _isNailed;
 
-        public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        private Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
             _type = type;
             _numberOfCoconuts = numberOfCoconuts;
@@ -37,6 +37,11 @@ namespace parrot
         private double GetBaseSpeed(double voltage)
         {
             return Math.Min(24.0, voltage * BaseSpeed);
+        }
+
+        public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        {
+            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
         }
     }
 }
