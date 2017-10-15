@@ -27,13 +27,13 @@ namespace parrot
         }
     }
 
-    public class NorwegianBlueParrot : Parrot
+    internal class NorwegianBlueParrot : Parrot
     {
         protected const double MaxSpeed = 24.0;
         private readonly double _voltage;
         private readonly bool _isNailed;
 
-        public NorwegianBlueParrot(double voltage, bool isNailed)
+        internal NorwegianBlueParrot(double voltage, bool isNailed)
         {
             _voltage = voltage;
             _isNailed = isNailed;
@@ -45,12 +45,12 @@ namespace parrot
         }
     }
 
-    public class AfricanParrot : Parrot
+    internal class AfricanParrot : Parrot
     {
         protected const double LoadFactor = 9.0;
         private readonly int _numberOfCoconuts;
 
-        public AfricanParrot(int numberOfCoconuts)
+        internal AfricanParrot(int numberOfCoconuts)
         {
             this._numberOfCoconuts = numberOfCoconuts;
         }
@@ -61,7 +61,7 @@ namespace parrot
         }
     }
 
-    public class EuropeanParrot : Parrot
+    internal class EuropeanParrot : Parrot
     {
         public override double GetSpeed()
         {
