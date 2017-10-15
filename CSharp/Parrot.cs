@@ -43,9 +43,18 @@ namespace parrot
             {
                 case ParrotTypeEnum.EUROPEAN:
                     return new EuropeanParrot();
+                case ParrotTypeEnum.AFRICAN:
+                    return new AfricanParrot(numberOfCoconuts);
                 default:
                     return new Parrot(type, numberOfCoconuts, voltage, isNailed);
             }
+        }
+    }
+
+    public class AfricanParrot : Parrot
+    {
+        public AfricanParrot(int numberOfCoconuts) : base(ParrotTypeEnum.AFRICAN, numberOfCoconuts, 0, false)
+        {
         }
     }
 
