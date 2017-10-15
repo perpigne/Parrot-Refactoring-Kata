@@ -37,10 +37,21 @@ namespace parrot
                 case ParrotTypeEnum.EUROPEAN:
                     speedStrategy = new EuropeanSpeed();
                     break;
+                case ParrotTypeEnum.AFRICAN:
+                    speedStrategy = new AfricanSpeed();
+                    break;
 
             }
 
             return new Parrot(type, numberOfCoconuts, voltage, isNailed, speedStrategy);
+        }
+    }
+
+    public class AfricanSpeed : SpeedStrategy
+    {
+        public override double GetSpeed(Parrot parrot)
+        {
+            return Math.Max(0,GetBaseSpeed() - parrot.NumberOfCoconuts * GetLoadFactor());
         }
     }
 
@@ -60,10 +71,6 @@ namespace parrot
 
             switch (parrot.Type)
             {
-                case ParrotTypeEnum.EUROPEAN:
-                    return GetBaseSpeed();
-                case ParrotTypeEnum.AFRICAN:
-                    return Math.Max(0, GetBaseSpeed() - GetLoadFactor() * parrot.NumberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
                     return (parrot.IsNailed) ? 0 : GetBaseSpeed(parrot.Voltage);
             }
