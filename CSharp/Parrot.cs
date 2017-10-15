@@ -41,7 +41,12 @@ namespace parrot
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
-            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+            switch (type)
+            {
+
+                default:
+                    return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+            }
         }
     }
 }
