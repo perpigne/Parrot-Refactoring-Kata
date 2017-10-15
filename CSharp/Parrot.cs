@@ -11,17 +11,17 @@ namespace parrot
         public abstract double GetSpeed();
 
 
-        public static Parrot CreateNorwegianBlueParrot(double voltage, bool isNailed)
+        public static Parrot NorwegianBlue(double voltage, bool isNailed)
         {
             return new NorwegianBlueParrot(voltage, isNailed);
         }
 
-        public static Parrot CreateAfricanParrot(int numberOfCoconuts)
+        public static Parrot African(int numberOfCoconuts)
         {
             return new AfricanParrot(numberOfCoconuts);
         }
 
-        public static Parrot CreateEuropeanParrot()
+        public static Parrot European()
         {
             return new EuropeanParrot();
         }
