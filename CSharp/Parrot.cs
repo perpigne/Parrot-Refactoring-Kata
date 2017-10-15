@@ -13,12 +13,17 @@ namespace parrot
         readonly double _voltage;
         readonly bool _isNailed;
 
-        private Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        internal Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
             _type = type;
             _numberOfCoconuts = numberOfCoconuts;
             _voltage = voltage;
             _isNailed = isNailed; 
+        }
+
+        protected Parrot()
+        {
+            
         }
 
         public double GetSpeed()
@@ -38,7 +43,17 @@ namespace parrot
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
-            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+            switch (type)
+            {
+                case ParrotTypeEnum.EUROPEAN:
+                    return new EuropeanParrot();
+                default:
+                    return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+            }
         }
+    }
+
+    public class EuropeanParrot : Parrot
+    {
     }
 }
