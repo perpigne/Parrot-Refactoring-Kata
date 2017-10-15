@@ -49,18 +49,18 @@ namespace parrot
 
     public class NorwegianBlueSpeed : SpeedStrategy
     {
-        private double voltage;
-        private bool isNailed;
+        private readonly double _voltage;
+        private readonly bool _isNailed;
 
         public NorwegianBlueSpeed(double voltage, bool isNailed)
         {
-            this.voltage = voltage;
-            this.isNailed = isNailed;
+            _voltage = voltage;
+            _isNailed = isNailed;
         }
 
         public override double GetSpeed(Parrot parrot)
         {
-            return (isNailed) ? 0 : GetBaseSpeed(voltage);
+            return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
         }
 
         public double GetBaseSpeed(double voltage)
