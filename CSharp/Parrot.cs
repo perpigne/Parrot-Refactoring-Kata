@@ -7,7 +7,6 @@ namespace parrot
     {
         protected const double BaseSpeed = 12.0;
 
-
         public abstract double GetSpeed();
 
 
@@ -29,7 +28,7 @@ namespace parrot
 
     internal class NorwegianBlueParrot : Parrot
     {
-        protected const double MaxSpeed = 24.0;
+        private const double MaxSpeed = 24.0;
         private readonly double _voltage;
         private readonly bool _isNailed;
 
@@ -47,7 +46,7 @@ namespace parrot
 
     internal class AfricanParrot : Parrot
     {
-        protected const double LoadFactor = 9.0;
+        private const double LoadFactor = 9.0;
         private readonly int _numberOfCoconuts;
 
         internal AfricanParrot(int numberOfCoconuts)
