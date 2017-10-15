@@ -39,7 +39,7 @@ namespace parrot
                     break;
 
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    speedStrategy = new NorwegianBlueSpeed();
+                    speedStrategy = new NorwegianBlueSpeed(voltage, isNailed);
                     break;
             }
 
@@ -49,9 +49,23 @@ namespace parrot
 
     public class NorwegianBlueSpeed : SpeedStrategy
     {
+        private double voltage;
+        private bool isNailed;
+
+        public NorwegianBlueSpeed(double voltage, bool isNailed)
+        {
+            this.voltage = voltage;
+            this.isNailed = isNailed;
+        }
+
         public override double GetSpeed(Parrot parrot)
         {
-            return (parrot.IsNailed) ? 0 : GetBaseSpeed(parrot.Voltage);
+            return (isNailed) ? 0 : GetBaseSpeed(voltage);
+        }
+
+        public double GetBaseSpeed(double voltage)
+        {
+            return Math.Min(24.0, voltage * GetBaseSpeed());
         }
     }
 
@@ -92,11 +106,6 @@ namespace parrot
         public double GetBaseSpeed()
         {
             return 12.0;
-        }
-
-        public double GetBaseSpeed(double voltage)
-        {
-            return Math.Min(24.0, voltage * this.GetBaseSpeed());
         }
     }
 }
