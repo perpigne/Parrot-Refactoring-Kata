@@ -14,14 +14,29 @@ namespace parrot
             switch (type)
             {
                 case ParrotTypeEnum.EUROPEAN:
-                    return new EuropeanParrot();
+                    return European();
                 case ParrotTypeEnum.AFRICAN:
-                    return new AfricanParrot(numberOfCoconuts);
+                    return African(numberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return new NorwegianBlueParrot(voltage, isNailed);
+                    return NorwegianBlue(voltage, isNailed);
                 default:
                     throw new Exception("Don't know parrot of type " + type);
             }
+        }
+
+        public static Parrot NorwegianBlue(double voltage, bool isNailed)
+        {
+            return new NorwegianBlueParrot(voltage, isNailed);
+        }
+
+        public static Parrot African(int numberOfCoconuts)
+        {
+            return new AfricanParrot(numberOfCoconuts);
+        }
+
+        public static Parrot European()
+        {
+            return new EuropeanParrot();
         }
     }
 
