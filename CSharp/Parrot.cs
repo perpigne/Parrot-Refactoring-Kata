@@ -27,8 +27,8 @@ namespace parrot
 
     public class NorwegianBlueParrot : Parrot
     {
-        protected readonly double _voltage;
-        protected readonly bool _isNailed;
+        private readonly double _voltage;
+        private readonly bool _isNailed;
 
         public NorwegianBlueParrot(double voltage, bool isNailed)
         {
