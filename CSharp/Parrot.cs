@@ -4,21 +4,12 @@ namespace parrot
 {
     public class Parrot
     {
-        public Parrot(int numberOfCoconuts, double voltage, bool isNailed, SpeedStrategy speedStrategy)
+        public Parrot(SpeedStrategy speedStrategy)
         {
             Strategy = speedStrategy;
-            NumberOfCoconuts = numberOfCoconuts;
-            Voltage = voltage;
-            IsNailed = isNailed; 
         }
 
         private SpeedStrategy Strategy { get; }
-
-        public int NumberOfCoconuts { get; }
-
-        public bool IsNailed { get; }
-
-        public double Voltage { get; }
 
         public double GetSpeed()
         {
@@ -43,7 +34,7 @@ namespace parrot
                     break;
             }
 
-            return new Parrot(numberOfCoconuts, voltage, isNailed, speedStrategy);
+            return new Parrot(speedStrategy);
         }
     }
 
