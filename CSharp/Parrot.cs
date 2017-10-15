@@ -2,17 +2,12 @@
 
 namespace parrot
 {
-    public class Parrot
+    public abstract class Parrot
     {
         protected const double BaseSpeed = 12.0;
 
 
-        public virtual double GetSpeed()
-        {
-            
-
-            throw new Exception("Should be unreachable");
-        }
+        public abstract double GetSpeed();
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
@@ -25,7 +20,7 @@ namespace parrot
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
                     return new NorwegianBlueParrot(voltage, isNailed);
                 default:
-                    return new Parrot();
+                    throw new Exception("Don't know parrot of type " + type);
             }
         }
     }
