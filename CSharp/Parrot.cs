@@ -4,18 +4,15 @@ namespace parrot
 {
     public class Parrot
     {
-        public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed, SpeedStrategy speedStrategy)
+        public Parrot(int numberOfCoconuts, double voltage, bool isNailed, SpeedStrategy speedStrategy)
         {
             Strategy = speedStrategy;
-            Type = type;
             NumberOfCoconuts = numberOfCoconuts;
             Voltage = voltage;
             IsNailed = isNailed; 
         }
 
         private SpeedStrategy Strategy { get; }
-
-        internal ParrotTypeEnum Type { get; }
 
         public int NumberOfCoconuts { get; }
 
@@ -38,7 +35,7 @@ namespace parrot
                     speedStrategy = new EuropeanSpeed();
                     break;
                 case ParrotTypeEnum.AFRICAN:
-                    speedStrategy = new AfricanSpeed();
+                    speedStrategy = new AfricanSpeed(numberOfCoconuts);
                     break;
 
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
@@ -46,7 +43,7 @@ namespace parrot
                     break;
             }
 
-            return new Parrot(type, numberOfCoconuts, voltage, isNailed, speedStrategy);
+            return new Parrot(numberOfCoconuts, voltage, isNailed, speedStrategy);
         }
     }
 
@@ -60,9 +57,19 @@ namespace parrot
 
     public class AfricanSpeed : SpeedStrategy
     {
+        private const double LoadFactor = 9.0;
+        private const double MinSpeed = 0.0;
+
+        private readonly int _numberOfCoconuts;
+
+        public AfricanSpeed(int numberOfCoconuts)
+        {
+            this._numberOfCoconuts = numberOfCoconuts;
+        }
+
         public override double GetSpeed(Parrot parrot)
         {
-            return Math.Max(0,GetBaseSpeed() - parrot.NumberOfCoconuts * GetLoadFactor());
+            return Math.Max(MinSpeed, GetBaseSpeed() - _numberOfCoconuts * LoadFactor);
         }
     }
 
@@ -85,11 +92,6 @@ namespace parrot
         public double GetBaseSpeed()
         {
             return 12.0;
-        }
-
-        public double GetLoadFactor()
-        {
-            return 9.0;
         }
 
         public double GetBaseSpeed(double voltage)
