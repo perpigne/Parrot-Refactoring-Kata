@@ -13,7 +13,7 @@ namespace parrot
 
         public double GetSpeed()
         {
-            return Strategy.GetSpeed(this);
+            return Strategy.GetSpeed();
         }
 
 
@@ -44,7 +44,7 @@ namespace parrot
             _isNailed = isNailed;
         }
 
-        public override double GetSpeed(Parrot parrot)
+        public override double GetSpeed()
         {
             return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
         }
@@ -67,7 +67,7 @@ namespace parrot
             this._numberOfCoconuts = numberOfCoconuts;
         }
 
-        public override double GetSpeed(Parrot parrot)
+        public override double GetSpeed()
         {
             return Math.Max(MinSpeed, BaseSpeed - _numberOfCoconuts * LoadFactor);
         }
@@ -75,7 +75,7 @@ namespace parrot
 
     public class EuropeanSpeed : SpeedStrategy
     {
-        public override double GetSpeed(Parrot parrot)
+        public override double GetSpeed()
         {
             return BaseSpeed;
         }
@@ -85,7 +85,7 @@ namespace parrot
     {
         protected const double BaseSpeed = 12.0;
 
-        public virtual double GetSpeed(Parrot parrot)
+        public virtual double GetSpeed()
         {
             throw new Exception("Should be unreachable");
         }
