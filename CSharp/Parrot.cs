@@ -4,9 +4,9 @@ namespace parrot
 {
     public class Parrot
     {
-        public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed, SpeedStrategy speedStrategy)
         {
-            Strategy = new SpeedStrategy();
+            Strategy = speedStrategy;
             Type = type;
             NumberOfCoconuts = numberOfCoconuts;
             Voltage = voltage;
@@ -30,14 +30,32 @@ namespace parrot
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
-            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+
+            var speedStrategy = new SpeedStrategy();
+            switch (type)
+            {
+                case ParrotTypeEnum.EUROPEAN:
+                    speedStrategy = new EuropeanSpeed();
+                    break;
+
+            }
+
+            return new Parrot(type, numberOfCoconuts, voltage, isNailed, speedStrategy);
+        }
+    }
+
+    public class EuropeanSpeed : SpeedStrategy
+    {
+        public override double GetSpeed(Parrot parrot)
+        {
+            return GetBaseSpeed();
         }
     }
 
     public class SpeedStrategy
     {
 
-        public double GetSpeed(Parrot parrot)
+        public virtual double GetSpeed(Parrot parrot)
         {
 
             switch (parrot.Type)
