@@ -41,9 +41,20 @@ namespace parrot
                     speedStrategy = new AfricanSpeed();
                     break;
 
+                case ParrotTypeEnum.NORWEGIAN_BLUE:
+                    speedStrategy = new NorwegianBlueSpeed();
+                    break;
             }
 
             return new Parrot(type, numberOfCoconuts, voltage, isNailed, speedStrategy);
+        }
+    }
+
+    public class NorwegianBlueSpeed : SpeedStrategy
+    {
+        public override double GetSpeed(Parrot parrot)
+        {
+            return (parrot.IsNailed) ? 0 : GetBaseSpeed(parrot.Voltage);
         }
     }
 
@@ -68,13 +79,6 @@ namespace parrot
 
         public virtual double GetSpeed(Parrot parrot)
         {
-
-            switch (parrot.Type)
-            {
-                case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return (parrot.IsNailed) ? 0 : GetBaseSpeed(parrot.Voltage);
-            }
-
             throw new Exception("Should be unreachable");
         }
 
