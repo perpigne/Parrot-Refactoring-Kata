@@ -4,17 +4,14 @@ namespace parrot
 {
     public class Parrot
     {
-        private const double LoadFactor = 9.0;
         protected const double BaseSpeed = 12.0;
         readonly ParrotTypeEnum _type;
-        readonly int _numberOfCoconuts;
         readonly double _voltage;
         readonly bool _isNailed;
 
-        protected Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        protected Parrot(ParrotTypeEnum type, double voltage, bool isNailed)
         {
             _type = type;
-            _numberOfCoconuts = numberOfCoconuts;
             _voltage = voltage;
             _isNailed = isNailed; 
         }
@@ -23,8 +20,6 @@ namespace parrot
         {
             switch (_type)
             {
-                case ParrotTypeEnum.AFRICAN:
-                    return Math.Max(0, BaseSpeed - LoadFactor * _numberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
                     return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
             }
@@ -46,21 +41,30 @@ namespace parrot
                 case ParrotTypeEnum.AFRICAN:
                     return new AfricanParrot(numberOfCoconuts);
                 default:
-                    return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+                    return new Parrot(type, voltage, isNailed);
             }
         }
     }
 
     public class AfricanParrot : Parrot
     {
-        public AfricanParrot(int numberOfCoconuts) : base(ParrotTypeEnum.AFRICAN, numberOfCoconuts, 0, false)
+        private const double LoadFactor = 9.0;
+        private readonly int _numberOfCoconuts;
+
+        public AfricanParrot(int numberOfCoconuts) : base(ParrotTypeEnum.AFRICAN, 0, false)
         {
+            this._numberOfCoconuts = numberOfCoconuts;
+        }
+
+        public override double GetSpeed()
+        {
+            return Math.Max(0, BaseSpeed - LoadFactor * _numberOfCoconuts);
         }
     }
 
     public class EuropeanParrot : Parrot
     {
-        public EuropeanParrot() : base(ParrotTypeEnum.EUROPEAN, 0, 0, false)
+        public EuropeanParrot() : base(ParrotTypeEnum.EUROPEAN, 0, false)
         {
         }
 
