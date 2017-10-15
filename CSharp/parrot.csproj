@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="Parrot.cs" />
     <Compile Include="ParrotTest.cs" />
-    <Compile Include="ParrotTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>
