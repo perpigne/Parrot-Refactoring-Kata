@@ -15,7 +15,7 @@ namespace parrot
 
         private SpeedStrategy Strategy { get; }
 
-        public ParrotTypeEnum Type { get; }
+        internal ParrotTypeEnum Type { get; }
 
         public int NumberOfCoconuts { get; }
 
@@ -25,7 +25,7 @@ namespace parrot
 
         public double GetSpeed()
         {
-            return this.Strategy.GetSpeed(this);
+            return Strategy.GetSpeed(this);
         }
     }
 
