@@ -9,20 +9,6 @@ namespace parrot
 
         public abstract double GetSpeed();
 
-        public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
-        {
-            switch (type)
-            {
-                case ParrotTypeEnum.EUROPEAN:
-                    return European();
-                case ParrotTypeEnum.AFRICAN:
-                    return African(numberOfCoconuts);
-                case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return NorwegianBlue(voltage, isNailed);
-                default:
-                    throw new Exception("Don't know parrot of type " + type);
-            }
-        }
 
         public static Parrot NorwegianBlue(double voltage, bool isNailed)
         {
