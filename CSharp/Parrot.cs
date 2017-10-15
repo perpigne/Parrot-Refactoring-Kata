@@ -6,30 +6,18 @@ namespace parrot
     {
         protected const double BaseSpeed = 12.0;
         readonly ParrotTypeEnum _type;
-        readonly double _voltage;
-        readonly bool _isNailed;
 
-        protected Parrot(ParrotTypeEnum type, double voltage, bool isNailed)
+        protected Parrot(ParrotTypeEnum type)
         {
             _type = type;
-            _voltage = voltage;
-            _isNailed = isNailed; 
+
         }
 
         public virtual double GetSpeed()
         {
-            switch (_type)
-            {
-                case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
-            }
+            
 
             throw new Exception("Should be unreachable");
-        }
-
-        private double GetBaseSpeed(double voltage)
-        {
-            return Math.Min(24.0, voltage * BaseSpeed);
         }
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
@@ -40,9 +28,33 @@ namespace parrot
                     return new EuropeanParrot();
                 case ParrotTypeEnum.AFRICAN:
                     return new AfricanParrot(numberOfCoconuts);
+                case ParrotTypeEnum.NORWEGIAN_BLUE:
+                    return new NorwegianBlueParrot(voltage, isNailed);
                 default:
-                    return new Parrot(type, voltage, isNailed);
+                    return new Parrot(type);
             }
+        }
+    }
+
+    public class NorwegianBlueParrot : Parrot
+    {
+        protected readonly double _voltage;
+        protected readonly bool _isNailed;
+
+        public NorwegianBlueParrot(double voltage, bool isNailed) : base(ParrotTypeEnum.NORWEGIAN_BLUE)
+        {
+            _voltage = voltage;
+            _isNailed = isNailed;
+        }
+
+        public override double GetSpeed()
+        {
+            return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
+        }
+
+        protected double GetBaseSpeed(double voltage)
+        {
+            return Math.Min(24.0, voltage * BaseSpeed);
         }
     }
 
@@ -51,7 +63,7 @@ namespace parrot
         private const double LoadFactor = 9.0;
         private readonly int _numberOfCoconuts;
 
-        public AfricanParrot(int numberOfCoconuts) : base(ParrotTypeEnum.AFRICAN, 0, false)
+        public AfricanParrot(int numberOfCoconuts) : base(ParrotTypeEnum.AFRICAN)
         {
             this._numberOfCoconuts = numberOfCoconuts;
         }
@@ -64,7 +76,7 @@ namespace parrot
 
     public class EuropeanParrot : Parrot
     {
-        public EuropeanParrot() : base(ParrotTypeEnum.EUROPEAN, 0, false)
+        public EuropeanParrot() : base(ParrotTypeEnum.EUROPEAN)
         {
         }
 
