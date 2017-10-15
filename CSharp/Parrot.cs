@@ -65,7 +65,7 @@ namespace parrot
 
         public double GetBaseSpeed(double voltage)
         {
-            return Math.Min(24.0, voltage * GetBaseSpeed());
+            return Math.Min(24.0, voltage * BaseSpeed);
         }
     }
 
@@ -83,7 +83,7 @@ namespace parrot
 
         public override double GetSpeed(Parrot parrot)
         {
-            return Math.Max(MinSpeed, GetBaseSpeed() - _numberOfCoconuts * LoadFactor);
+            return Math.Max(MinSpeed, BaseSpeed - _numberOfCoconuts * LoadFactor);
         }
     }
 
@@ -91,21 +91,17 @@ namespace parrot
     {
         public override double GetSpeed(Parrot parrot)
         {
-            return GetBaseSpeed();
+            return BaseSpeed;
         }
     }
 
     public class SpeedStrategy
     {
+        protected const double BaseSpeed = 12.0;
 
         public virtual double GetSpeed(Parrot parrot)
         {
             throw new Exception("Should be unreachable");
-        }
-
-        public double GetBaseSpeed()
-        {
-            return 12.0;
         }
     }
 }
