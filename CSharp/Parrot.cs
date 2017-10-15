@@ -18,23 +18,32 @@ namespace parrot
 
         public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
-
-            var speedStrategy = new SpeedStrategy();
             switch (type)
             {
                 case ParrotTypeEnum.EUROPEAN:
-                    speedStrategy = new EuropeanSpeed();
-                    break;
+                    return European();
                 case ParrotTypeEnum.AFRICAN:
-                    speedStrategy = new AfricanSpeed(numberOfCoconuts);
-                    break;
-
+                    return African(numberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    speedStrategy = new NorwegianBlueSpeed(voltage, isNailed);
-                    break;
+                    return NorwegianBlue(voltage, isNailed);
             }
+            throw new Exception("unknown type " + type);
 
-            return new Parrot(speedStrategy);
+        }
+
+        public static Parrot NorwegianBlue(double voltage, bool isNailed)
+        {
+            return new Parrot(new NorwegianBlueSpeed(voltage, isNailed));
+        }
+
+        public static Parrot African(int numberOfCoconuts)
+        {
+            return new Parrot(new AfricanSpeed(numberOfCoconuts));
+        }
+
+        public static Parrot European()
+        {
+            return new Parrot(new EuropeanSpeed());
         }
     }
 
