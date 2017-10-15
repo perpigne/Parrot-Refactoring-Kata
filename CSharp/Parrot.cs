@@ -4,12 +4,12 @@ namespace parrot
 {
     public class Parrot
     {
-        public Parrot(SpeedStrategy speedStrategy)
+        public Parrot(ISpeedStrategy speedStrategy)
         {
             Strategy = speedStrategy;
         }
 
-        private SpeedStrategy Strategy { get; }
+        private ISpeedStrategy Strategy { get; }
 
         public double GetSpeed()
         {
@@ -33,8 +33,9 @@ namespace parrot
         }
     }
 
-    public class NorwegianBlueSpeed : SpeedStrategy
+    public class NorwegianBlueSpeed : ISpeedStrategy
     {
+        protected const double BaseSpeed = 12.0;
         private readonly double _voltage;
         private readonly bool _isNailed;
 
@@ -44,7 +45,7 @@ namespace parrot
             _isNailed = isNailed;
         }
 
-        public override double GetSpeed()
+        public double GetSpeed()
         {
             return (_isNailed) ? 0 : GetBaseSpeed(_voltage);
         }
@@ -55,10 +56,11 @@ namespace parrot
         }
     }
 
-    public class AfricanSpeed : SpeedStrategy
+    public class AfricanSpeed : ISpeedStrategy
     {
         private const double LoadFactor = 9.0;
         private const double MinSpeed = 0.0;
+        protected const double BaseSpeed = 12.0;
 
         private readonly int _numberOfCoconuts;
 
@@ -67,27 +69,25 @@ namespace parrot
             this._numberOfCoconuts = numberOfCoconuts;
         }
 
-        public override double GetSpeed()
+        public double GetSpeed()
         {
             return Math.Max(MinSpeed, BaseSpeed - _numberOfCoconuts * LoadFactor);
         }
     }
 
-    public class EuropeanSpeed : SpeedStrategy
+    public class EuropeanSpeed : ISpeedStrategy
     {
-        public override double GetSpeed()
+        protected const double BaseSpeed = 12.0;
+
+        public double GetSpeed()
         {
             return BaseSpeed;
         }
     }
 
-    public class SpeedStrategy
+    public interface ISpeedStrategy
     {
-        protected const double BaseSpeed = 12.0;
-
-        public virtual double GetSpeed()
-        {
-            throw new Exception("Should be unreachable");
-        }
+        double GetSpeed();
     }
+
 }
