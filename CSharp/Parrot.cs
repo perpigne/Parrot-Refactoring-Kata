@@ -27,6 +27,11 @@ namespace parrot
         {
             return Strategy.GetSpeed(this);
         }
+
+        public static Parrot Create(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        {
+            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
+        }
     }
 
     public class SpeedStrategy
